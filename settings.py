@@ -1,11 +1,17 @@
+import pygame
+
 class Settings():
     """A class to store all the settings for Alien Invasion."""
     
     def __init__(self):
         """Initializing the game's static settings."""
         # Screen settings
-        self.screen_width = 1200
-        self.screen_height = 800
+        
+        self.full_screen = False
+ 
+        self.screen =  pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+            
+ 
         self.bg_color = (230, 230, 230)
         # Ship settings
         
@@ -22,6 +28,15 @@ class Settings():
         self.speedup_scale = 1.1
         self.score_scale = 1.5
         self.initialize_dynamic_setting()
+        
+    # def resize(self):    
+    #     if self.full_screen:
+    #         self.screen =  pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+            
+    #     else:
+    #         self.screen_width = 1200
+    #         self.screen_height = 800
+    #         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         
     def initialize_dynamic_setting(self):
         """Initialize settings that change throught the game."""

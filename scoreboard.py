@@ -18,10 +18,7 @@ class Scoreboard:
         self.font = pygame.font.SysFont(None, 48)
         
         # prepare the initial score image.
-        self.prep_score()
-        self.prep_high_score()
-        self.prep_level()
-        self.prep_ships()
+        self.prep_images()
         
     def prep_score(self):
         """Turn the score into a rendered image."""
@@ -83,4 +80,11 @@ class Scoreboard:
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.prep_high_score()
-            
+    
+    def prep_images(self):
+        """Prepare all the texts on the screen as images.""" 
+        self.prep_score()
+        self.prep_high_score()
+        self.prep_level()
+        self.prep_ships()
+        

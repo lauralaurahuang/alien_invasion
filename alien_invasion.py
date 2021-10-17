@@ -16,7 +16,7 @@ class AlienInvasion:
         pygame.init()
         
         self.settings = Settings()
-        self.screen = pygame.display.set_mode((0,0,), pygame.FULLSCREEN)
+        self.screen = self.settings.screen
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasioin")
@@ -71,9 +71,7 @@ class AlienInvasion:
             # Reset the game stats.
             self.stats.reset_stats()
             self.stats.game_active = True
-            self.sb.prep_score()
-            self.sb.prep_level()
-            self.sb.prep_ships()
+            self.sb.prep_images()
             
             #Get rid of any remaining aliens and bullets.
             self.aliens.empty()
@@ -97,7 +95,7 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
-    
+
     def _check_keyup_events(self,event):
         """"Respond to key releases."""
         if event.key == pygame.K_RIGHT:
@@ -137,13 +135,17 @@ class AlienInvasion:
             self.sb.check_high_score()
         
         if not self.aliens:
-            self.bullets.empty()
-            self._create_fleet()
-            self.settings.increase_speed()
-            # Increase level
-            self.stats.level += 1
-            self.sb.prep_level()
-                
+            self.start_new_level()
+            
+    def start_new_level(self):
+        """Gather all the ingredients for a new level."""
+        self.bullets.empty()
+        self._create_fleet()
+        self.settings.increase_speed()
+        # Increase level
+        self.stats.level += 1
+        self.sb.prep_level()
+                                
     def _update_aliens(self):
         """
         Check if the fleet in at an edge, 
